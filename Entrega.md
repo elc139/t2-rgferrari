@@ -51,7 +51,7 @@ Nome: René Gargano Ferrari
 
 3. A aceleração se sustenta para outros tamanhos de vetores, números de threads e repetições? Para responder a essa questão, você terá que realizar diversas execuções, variando o tamanho do problema (tamanho dos vetores e número de repetições) e o número de threads (1, 2, 4, 8..., dependendo do número de núcleos). Cada caso deve ser executado várias vezes, para depois calcular-se um tempo de processamento médio para cada caso. Atenção aos fatores que podem interferir na confiabilidade da medição: uso compartilhado do computador, tempos muito pequenos, etc.
 
-   A aceleração se sustentou para testes com até 4 threads. Com 2 threads houve uma aceleração em torno de **1.7x** e com 4 threads de **2.4**. O variação do número de repetições teve influência no tempo de execução, mas não na aceleração. Os testes foram feitos com o seguinte [Script] e é possível observar os resultados na próxima questão.
+   A aceleração se sustentou para testes com até 4 threads. Com 2 threads houve uma aceleração em torno de **1.7x** e com 4 threads de **2.4x**. A variação do número de repetições teve influência no tempo de execução, mas não na aceleração. Os testes foram feitos com o seguinte [Shell Script](https://github.com/elc139/t2-rgferrari/blob/master/execution_test.sh) e é possível observar os resultados na próxima questão.
 
 4. Elabore um gráfico/tabela de aceleração a partir dos dados obtidos no exercício anterior.
 
