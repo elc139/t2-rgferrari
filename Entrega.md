@@ -91,3 +91,4 @@ Nome: René Gargano Ferrari
 ### Referências
 
 - dubita illustrandas. Programação Paralela OpenMP - Aula 1 - Equipe DUBITA. https://www.youtube.com/watch?v=1JU931jZP2s.
+- Jaka's Corner. OpenMP: For & Reduction. http://jakascorner.com/blog/2016/06/omp-for-reduction.html.
