@@ -8,7 +8,40 @@ Nome: René Gargano Ferrari
 
 1. Explique como se encontram implementadas as 4 etapas de projeto: particionamento, comunicação, aglomeração, mapeamento (use trechos de código para ilustrar a explicação).
 
-   O **Particionamento** ocorre... 
+   O **Particionamento** consiste em analizar o que no programa pode ser feito em paralelo. No caso a multiplicação dos vetores pode ser dividida entre as threads e somada no final. Ela eh feita na linha 41:
+   
+   ```c
+   for (k = 0; k < dotdata.repeat; k++) {    // linha 38
+      mysum = 0.0;                           // linha 39
+      for (i = start; i < end ; i++)  {      // linha 40
+         mysum += (a[i] * b[i]);             // linha 41
+      }                                      // linha 42
+   }                                         // linha 43
+   ```
+   
+   A **Comunicação** trata-se dos dados que uma thread precisa ter da outra thread pra continuar executando. Nesse caso as threads precisavam saber se havia alguma thread executando na zona crítica do programa para poder prosseguir. Isso acontece nas linhas 45, 46, 47:
+   
+   ```c
+   pthread_mutex_lock (&mutexsum);      // linha 45
+   dotdata.c += mysum;                  // linha 46
+   pthread_mutex_unlock (&mutexsum);    // linha 47
+   ```
+   
+   A **Aglomeração** ocorre ao juntarmos os dados calculados em paralelo. No caso desse programa ela acontece na linha 46, onde todas as multiplicações são somadas em uma variável compartilhada por todas as threads:
+   
+   ```c
+   dotdata.c += mysum;  // linha 46
+   ```
+   
+   O **Mapeamento** é feito quando se divide de forma igual o trabalho entre todas as threads. Isso acontece quando o programa atribui um tamanho de vetor (worksize) igual para todas as threads, nas linhas 114, 123 e 33:
+   
+   ```c
+   wsize = atoi(argv[2]);        // linha 114
+   ...
+   dotdata.wsize = wsize;        // linha 123
+   ...
+   int wsize = dotdata.wsize;    // linha 33
+   ```
 
 2. Considerando o tempo (em microssegundos) mostrado na saída do programa, qual foi a aceleração (speedup) com o uso de threads?
 
@@ -25,9 +58,9 @@ Nome: René Gargano Ferrari
    A diferença entre o programa pthreads_dotprod.c e pthreads_dotprod2.c está nas linhas 45 e 47:
 
    ```c
-      pthread_mutex_lock (&mutexsum);      // linha 45
-      dotdata.c += mysum;                  // linha 46
-      pthread_mutex_unlock (&mutexsum);    // linha 47
+   pthread_mutex_lock (&mutexsum);      // linha 45
+   dotdata.c += mysum;                  // linha 46
+   pthread_mutex_unlock (&mutexsum);    // linha 47
    ```
 
    Como a variável dotdata.c é compartilhada por todas as threads em execução do programa, se forem atribuidos valores a ela ao mesmo tempo por mais de uma thread o resultado pode se tornar não determinístico. Para isso é utilizado no pthreads_dotprod.c a função ```c pthread_mutex_lock()``` que, quando a variável mutexsum não está bloqueada ele a bloqueia e segue em frente. Caso a variável já esteja bloqueada a função interrompe a execução da thread e aguarda a liberação da variável pela thread que a está usando, com a função ```c pthread_mutex_unlock()```. 
