@@ -77,7 +77,7 @@ Nome: René Gargano Ferrari
    pthread_mutex_unlock (&mutexsum);    // linha 47
    ```
 
-   Como a variável dotdata.c é compartilhada por todas as threads em execução do programa, se forem atribuidos valores a ela ao mesmo tempo por mais de uma thread o resultado pode se tornar não determinístico. Para isso é utilizado no pthreads_dotprod.c a função ```c pthread_mutex_lock()``` que, quando a variável mutexsum não está bloqueada ele a bloqueia e segue em frente. Caso a variável já esteja bloqueada a função interrompe a execução da thread e aguarda a liberação da variável pela thread que a está usando, com a função ```c pthread_mutex_unlock()```. 
+   Como a variável dotdata.c é compartilhada por todas as threads em execução do programa, se forem atribuidos valores a ela ao mesmo tempo por mais de uma thread o resultado pode se tornar não determinístico. Para isso é utilizado no pthreads_dotprod.c a função ``` pthread_mutex_lock()``` que, quando a variável mutexsum não está bloqueada ele a bloqueia e segue em frente. Caso a variável já esteja bloqueada a função interrompe a execução da thread e aguarda a liberação da variável pela thread que a está usando, com a função ```pthread_mutex_unlock()```. 
    
    Ou seja, com as linhas removidas, não é formada uma área de exclusão mútua, deixando o programa incorreto, pois dá chance a resultados não determinísticos.
 
