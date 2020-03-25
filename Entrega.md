@@ -8,9 +8,13 @@ Nome: René Gargano Ferrari
 
 1. Explique como se encontram implementadas as 4 etapas de projeto: particionamento, comunicação, aglomeração, mapeamento (use trechos de código para ilustrar a explicação).
 
-   O **Particionamento** consiste em analizar o que no programa pode ser feito em paralelo. No caso a multiplicação dos vetores pode ser dividida entre as threads e somada no final. Ela eh feita na linha 41:
+   O **Particionamento** consiste em analizar o que no programa pode ser feito em paralelo. No caso a multiplicação dos vetores pode ser dividida entre as threads e somada no final. O particionamento dos vetores é feito nas linhas 34 e 35 e a multiplicação na linha 41:
    
    ```c
+   int start = offset*wsize;                 // linha 34
+   int end = start + wsize;                  // linha 35
+   double mysum;                             // linha 36
+                                             // linha 37   
    for (k = 0; k < dotdata.repeat; k++) {    // linha 38
       mysum = 0.0;                           // linha 39
       for (i = start; i < end ; i++)  {      // linha 40
@@ -57,15 +61,15 @@ Nome: René Gargano Ferrari
 
    |size|repetitions|threads|usec(média)|speedup|
    |:---:|:---:|:---:|:---:|:---:|
-   |1000000|2000|1|1594118|1.0000|
-   |500000|2000|2|872713|1.8266|
-   |250000|2000|4|623299|2.5575|
-   |1000000|3000|1|2297605|1.0000|
-   |500000|3000|2|1323201|1.7363|
-   |250000|3000|4|923331|2.4883|
-   |1000000|4000|1|3114146|1.0000|
-   |500000|4000|2|1737447|1.7923|
-   |250000|4000|4|1225813|2.5404|
+   |1000000|2000|1|6150937|1.0000|
+   |500000|2000|2|3537221|1.7389|
+   |250000|2000|4|2441191|2.5196|
+   |1000000|3000|1|9148910|1.0000|
+   |500000|3000|2|5337825|1.7139|
+   |250000|3000|4|3677165|2.4880|
+   |1000000|4000|1|12221683|1.0000|
+   |500000|4000|2|6921560|1.7657|
+   |250000|4000|4|4951454|2.4683|
 
 5. Explique as diferenças entre pthreads_dotprod.c e pthreads_dotprod2.c. Com as linhas removidas, o programa está correto?
 
@@ -87,6 +91,26 @@ Nome: René Gargano Ferrari
 - The Heirloom Project. SH (1). http://heirloom.sourceforge.net/sh/sh.1.html.
 
 ## OpenMP
+
+1. Implemente um programa equivalente a pthreads_dotprod.c usando OpenMP.
+
+   [Programa](https://github.com/elc139/t2-rgferrari/blob/master/openmp/openmp_dotprod.c) implementado.
+
+2. Avalie o desempenho do programa em OpenMP, usando os mesmos dados/argumentos do programa com threads POSIX.
+
+   Foram realizados os mesmos testes feitos com Pthreads. A aceleração se manteve em torno de **1.7x** para 2 threads e **2.4x** para 4 threads. Observam-se os resultados na tabela abaixo.  
+
+   |size|repetitions|threads|usec(média)|speedup|
+   |:---:|:---:|:---:|:---:|:---:|
+   |1000000|2000|1|6066925|1.0000|
+   |500000|2000|2|3380981|1.7944|
+   |250000|2000|4|2517252|2.4101|
+   |1000000|3000|1|9148878|1.0000|
+   |500000|3000|2|5093484|1.7961|
+   |250000|3000|4|3736830|2.4482|
+   |1000000|4000|1|12125893|1.0000|
+   |500000|4000|2|6744475|1.7979|
+   |250000|4000|4|5032534|2.4095|
 
 ### Referências
 
