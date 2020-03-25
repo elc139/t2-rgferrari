@@ -84,12 +84,10 @@ Nome: René Gargano Ferrari
 ### Referências
 
 - Linux Documentation. pthread_mutex_lock(3) - Linux man page. https://linux.die.net/man/3/pthread_mutex_lock.
-- https://medium.com/@nick3499/bash-echo-scale-bc-numerical-fractions-753fb979792c.
-- http://heirloom.sourceforge.net/sh/sh.1.html.
-- Complete aqui: Autor (nome de pessoa ou instituição). Título. URL.
+- The Heirloom Project. SH (1). http://heirloom.sourceforge.net/sh/sh.1.html.
 
 ## OpenMP
 
 ### Referências
 
-- Complete aqui: Autor (nome de pessoa ou instituição). Título. URL.
+- dubita illustrandas. Programação Paralela OpenMP - Aula 1 - Equipe DUBITA. https://www.youtube.com/watch?v=1JU931jZP2s.
