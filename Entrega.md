@@ -51,7 +51,21 @@ Nome: René Gargano Ferrari
 
 3. A aceleração se sustenta para outros tamanhos de vetores, números de threads e repetições? Para responder a essa questão, você terá que realizar diversas execuções, variando o tamanho do problema (tamanho dos vetores e número de repetições) e o número de threads (1, 2, 4, 8..., dependendo do número de núcleos). Cada caso deve ser executado várias vezes, para depois calcular-se um tempo de processamento médio para cada caso. Atenção aos fatores que podem interferir na confiabilidade da medição: uso compartilhado do computador, tempos muito pequenos, etc.
 
+   A aceleração se sustentou para testes com até 4 threads. Com 2 threads houve uma aceleração em torno de **1.7x** e com 4 threads de **2.4**. O variação do número de repetições teve influência no tempo de execução, mas não na aceleração. Os testes foram feitos com o seguinte [Script] e é possível observar os resultados na próxima questão.
+
 4. Elabore um gráfico/tabela de aceleração a partir dos dados obtidos no exercício anterior.
+
+   |size|repetitions|threads|usec(média)|speedup|
+   |:---:|:---:|:---:|:---:|:---:|
+   |1000000|2000|1|1594118|1.0000|
+   |500000|2000|2|872713|1.8266|
+   |250000|2000|4|623299|2.5575|
+   |1000000|3000|1|2297605|1.0000|
+   |500000|3000|2|1323201|1.7363|
+   |250000|3000|4|923331|2.4883|
+   |1000000|4000|1|3114146|1.0000|
+   |500000|4000|2|1737447|1.7923|
+   |250000|4000|4|1225813|2.5404|
 
 5. Explique as diferenças entre pthreads_dotprod.c e pthreads_dotprod2.c. Com as linhas removidas, o programa está correto?
 
@@ -70,6 +84,8 @@ Nome: René Gargano Ferrari
 ### Referências
 
 - Linux Documentation. pthread_mutex_lock(3) - Linux man page. https://linux.die.net/man/3/pthread_mutex_lock.
+- https://medium.com/@nick3499/bash-echo-scale-bc-numerical-fractions-753fb979792c.
+- http://heirloom.sourceforge.net/sh/sh.1.html.
 - Complete aqui: Autor (nome de pessoa ou instituição). Título. URL.
 
 ## OpenMP
